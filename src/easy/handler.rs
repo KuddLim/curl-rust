@@ -826,6 +826,14 @@ impl<H> Easy2<H> {
         self.setopt_str(curl_sys::CURLOPT_ABSTRACT_UNIX_SOCKET, &addr)
     }
 
+    /// Sets the interface name to use as outgoing network interface. The name can be an interface name,
+    /// an IP address, or a host name.
+    #[cfg(not(target_os = "windows"))]
+    pub fn set_interface(&mut self, interface: &str) -> Result<(), Error> {
+        let name = CString::new(interface)?;
+        self.setopt_str(curl_sys::CURLOPT_INTERFACE, &name)
+    }
+
     // =========================================================================
     // Internal accessors
 

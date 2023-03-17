@@ -170,6 +170,10 @@ impl Easy {
         self.inner.unix_socket_path(path)
     }
 
+    pub fn interface(&mut self, name: &str) -> Result<(), Error> {
+        self.inner.set_interface(name)
+    }
+
     /// Same as [`Easy2::abstract_unix_socket`](struct.Easy2.html#method.abstract_unix_socket)
     ///
     /// NOTE: this API can only be used on Linux OS.
